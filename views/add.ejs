@@ -1,0 +1,56 @@
+<% include partials/header %>
+
+<div class="container">
+    <h1>
+        <%= title %>
+    </h1>
+    <form class="form-horizontal" action="" method="POST">
+            <div class="form-group">
+              <label for="inputNama" class="col-sm-2 control-label">Nama</label>
+              <div class="col-sm-10">
+                <input type="text" class="form-control" id="inputNama" name="nama" placeholder="Nama anda..">
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="inputUmur" class="col-sm-2 control-label">Umur</label>
+              <div class="col-sm-10">
+                <input type="number" class="form-control" id="inputUmur" name="umur" placeholder="Umur anda..">
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="inputTinggi" class="col-sm-2 control-label">Tinggi</label>
+              <div class="col-sm-10">
+                <input type="number" class="form-control" id="inputTinggi" name="tinggi" placeholder="Tinggi anda.." step="any">
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="inputLahir" class="col-sm-2 control-label">Lahir</label>
+              <div class="col-sm-10">
+                <input type="date" class="form-control" id="inputLahir" name="lahir" placeholder="Kelahiran anda..">
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="inputStatus" class="col-sm-2 control-label">Status</label>
+              <div class="col-sm-10">
+                <select class="form-control" name="status">
+                        <option value="true">Menikah</option>
+                        <option value="false">Jomblo</option>
+                </select>
+              </div>
+            </div>
+            
+      
+
+            <div class="form-group">
+              <div class="col-sm-offset-2 col-sm-10">
+                <button type="submit" class="btn btn-default">simpan</button>
+              </div>
+            </div>
+          </form>
+</div>
+
+<% include partials/footer %>

@@ -1,0 +1,149 @@
+<% include partials/header %>
+<div class="container">
+    <h1>
+   <a href="/"> Home<a>
+    </h1>
+
+        <div class="panel panel-primary">
+            <div class="panel panel-primary">
+        <form method="GET">
+            <input type="hidden" name="page" value="1" />
+            <div class="panel-heading">Pencarian</div>
+            <div class="panel-body">
+                <table style="width: 100%;">
+
+                    <tr>
+                        <td><input type="checkbox" name="cnama" <%=query.cnama ? ' checked' : '' ; %> /></td>
+                        <td><label>Nama :</label></td>
+                        <td><input type="text" class="form-control" name="nama" value="<%= query.nama %>" /></td>
+                    </tr>
+                    <tr>
+                        <td><input type="checkbox" name="cumur" <%=query.cumur ? ' checked' : '' ; %>/></td>
+                        <td><label>Umur :</label></td>
+                        <td><input type="text" class="form-control" name="umur" value="<%= query.umur %>" /></td>
+                    </tr>
+                    <tr>
+                        <td><input type="checkbox" name="ctinggi" <%=query.ctinggi ? ' checked' : '' ; %> /></td>
+                        <td><label>Tinggi :</label></td>
+                        <td><input type="text" class="form-control" name="tinggi" value="<%= query.tinggi %>" /></td>
+                    </tr>
+                    <tr>
+                        <td><input type="checkbox" name="clahir" <%=query.clahir ? ' checked' : '' ; %> /></td>
+                        <td><label>Lahir</label></td>
+                        <td>
+                            <table>
+                                <tr>
+
+                                    <td><input type="date" class="form-control" name="startlahir" value="<%= query.startlahir %>" /></td>
+                                    <td>S.D</td>
+                                    <td> <input type="date" class="form-control" name="endlahir" value="<%= query.endlahir %>" /></td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><input type="checkbox" name="cstatus" <%=query.cstatus ? ' checked' : '' ; %>/></td>
+                        <td><label>Status</label></td>
+                        <td>
+                            <select class="form-control" name="status">
+                                <option value=""> - pilih - </option>
+                                <option value="true" <%=query.status=='true' ? ' selected' : '' %> >Menikah</option>
+                                <option value="false" <%=query.status=='false' ? ' selected' : '' %> >Jomblo</option>
+                            </select>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+            <div class="panel-footer">
+                <button type="submit" class="btn btn-info">cari</button>
+                <a href="/" class="btn btn-warning">reset</a>
+            </div>
+        </form>
+    </div>
+        </div>
+
+        <a href="add" class="btn btn-primary">
+            TAMBAH
+        </a>
+
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Nama</th>
+                    <th>Umur</th>
+                    <th>Tinggi</th>
+                    <th>Lahir</th>
+                    <th>Status</th>
+                    <th>Actions</th>
+
+                </tr>
+            </thead>
+
+            <tbody>
+                <% for(let i=0;i<data.length;i++){i%>
+                <tr>
+                    <td>
+                        <%=data[i]._id%>
+                    </td>
+                    <td>
+                        <%=data[i].nama%>
+                    </td>
+                    <td>
+                        <%=data[i].umur%>
+                    </td>
+                    <td>
+                        <%=data[i].tinggi%>
+                    </td>
+                    <td>
+                        <%=helpers.formatDate(data[i].lahir)%>
+                    </td>
+                    <td>
+                        <%=data[i].status ? 'menikah':'jomblo'%>
+                    </td>
+                    <td>
+                        <a href="edit/<%=data[i]._id%>" class="btn btn-success">
+                            Edit
+                        </a>
+                        <a href="delete/<%=data[i]._id%>" class="btn btn-danger" onclick="return confirm('Yakin mau delete? ');">
+                            Delete
+                        </a>
+                    </td>
+                </tr>
+                <%}%>
+            </tbody>
+        </table>
+
+        <nav aria-label="Page navigation">
+        <ul class="pagination">
+            <% if(pagination.page > 1){ %>
+            <li>
+                <a href="<%= pagination.url.replace(`page=${pagination.page}`, `page=${parseInt(pagination.page)-1}`) %>"
+                    aria-label="Previous">
+                    <span aria-hidden="true">&laquo;</span>
+                </a>
+            </li>
+            <% } %>
+            <%for(let i=1;i<=pagination.pages;i++){%>
+
+            <li class="<%= pagination.page==i ? 'active':'' %> ">
+                <a href="<%= pagination.url.replace(`page=${pagination.page}`, `page=${i}`) %>">
+                    <%=i%></a></li>
+
+            <%}%>
+            <% if(pagination.page < pagination.pages){ %>
+            <li>
+                <a href="<%= pagination.url.replace(`page=${pagination.page}`, `page=${parseInt(pagination.page)+1}`) %>"
+                    aria-label="Next">
+                    <span aria-hidden="true">&raquo;</span>
+                </a>
+            </li>
+            <% } %>
+        </ul>
+    </nav>
+
+
+
+    
+</div>    
+    <% include partials/footer %>
